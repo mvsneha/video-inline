@@ -1,1 +1,17 @@
 
+{
+	"name": "test",
+	"type": "project",
+	"description": "default kodebase",
+	"license": "MIT",
+
+	
+
+	"require": {
+	    
+	},
+
+	"require-dev": {
+		
+	}
+}
