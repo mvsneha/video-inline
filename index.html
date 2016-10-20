@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Landscape Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+
+        body {
+            background: #000;
+            margin: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        .video-container {
+           width: 100%;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+
+
+        @media only screen and (max-width: 600px) and (orientation: portrait) {
+            .video-container {
+                width: 100vh;
+                height: 100vw;
+                -webkit-transform: rotate(90deg);
+                transform: rotate(90deg);
+                -webkit-transform-origin: 50vw 50vw;
+                transform-origin: 50vw 50vw;
+                z-index: 1030;
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+                min-height: 320px;
+            }
+        }
+
+
+    </style>
+    <script src='/script/iphone-inline-video.browser.js'></script>
+
+</head>
+<body translate="no">
+<div class="video-container">
+	<video playsinline webkit-playsinline preload="metadata" id="myVideo" autoplay
+        src="/video.mp4"></video>
+</div>
+<div><p>沪ICP备15013228号</p></div>
+<script>
+    //const makeVideoPlayableInline = require('iphone-inline-video');
+    var ios = /iPhone/.test(navigator.userAgent);
+    var iosVersion = null;
+    var myVideo = document.getElementById('myVideo');
+
+    if(ios)
+    {
+        iosVersion = getIOSVersion();
+
+        if(ios && iosVersion > 7)
+        {
+            makeVideoPlayableInline(myVideo);
+        }
+
+        myVideo.addEventListener('touchstart', function () {
+            // document.getElementById('myVideo').requestFullscreen();
+            myVideo.play();
+        });
+    }
+
+
+
+    function getIOSVersion() {
+       var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
+       var version = [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+       return version[0];
+    }
+</script>
+</body>
+</html>
